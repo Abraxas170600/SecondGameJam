@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5945657148795289762}
   - component: {fileID: 1780522582510147240}
   - component: {fileID: 2801629232115140383}
-  - component: {fileID: 5867204224810517243}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5867204224810517243
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025595578458877466}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7989968748718821141
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,10 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2712181290658197313}
   - component: {fileID: 7109474179340002686}
-  - component: {fileID: 1013756956519738992}
-  - component: {fileID: -8351346421427670478}
+  - component: {fileID: 159182847052607779}
+  - component: {fileID: 6575920946367109535}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: FireballBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5945657148795289762}
@@ -165,9 +143,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
---- !u!114 &1013756956519738992
+--- !u!114 &159182847052607779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,23 +154,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7989968748718821141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76183199787a43445b56f420834da15a, type: 3}
+  m_Script: {fileID: 11500000, guid: f2c8cc5e6e5be8a4f8882f1c7a1d7d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootVel: 10
-  shotIncl: 0
---- !u!114 &-8351346421427670478
-MonoBehaviour:
+  damage: 30
+  timeLife: 2
+  speed: 10
+  angleVariation: 10
+--- !u!135 &6575920946367109535
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7989968748718821141}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f98d0200fa9b948945f91f7991bc6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fromPlayer: 0
-  projectileDamage: 10
-  projectileDestroyTime: 3
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

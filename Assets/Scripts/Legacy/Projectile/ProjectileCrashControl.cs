@@ -27,7 +27,7 @@ public class ProjectileCrashControl : MonoBehaviour
         {
             /*  If player shoots and it hit an enemy, the enemy takes damage
                 If enemy shoots and it hits the player, the player takes damage */
-            other.gameObject.GetComponent<HealthController>().TakeDamage(projectileDamage);
+            //other.gameObject.GetComponent<HealthController>().TakeDamage(projectileDamage);
         }
         gameObject.SetActive(false);
     }
