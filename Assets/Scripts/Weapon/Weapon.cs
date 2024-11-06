@@ -14,22 +14,23 @@ public class Weapon : MonoBehaviour
 
     private float attackSpeedTimer;
 
-    private void Start()
+    private void Awake()
     {
         bulletSpawner.SetBullet(bulletType);
     }
 
-    private void Update()
+    public void UseWeapon(Animator playerAnim)
     {
         attackSpeedTimer -= Time.deltaTime;
 
         if (Input.GetButtonDown("Fire1"))
         {
+            playerAnim.Play("Attack");
             StartCoroutine(ShootBurst());
         }
     }
 
-    private IEnumerator ShootBurst()
+    public IEnumerator ShootBurst()
     {
         if (CanShoot())
         {

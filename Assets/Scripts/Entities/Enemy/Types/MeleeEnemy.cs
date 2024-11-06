@@ -13,4 +13,16 @@ public class MeleeEnemy : Enemy
             player.Push(transform);
         }
     }
+    protected override void Defeat()
+    {
+        base.Defeat();
+        enemyAnim.Play("Enemy-01-Death");
+    }
+    public void Desactive()
+    {
+        enemyAnim.SetTrigger("Respawn");
+        gameObject.SetActive(false);
+        respawnEvent.Invoke();
+        FullHealth();
+    }
 }

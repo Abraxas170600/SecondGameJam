@@ -10,9 +10,11 @@ public abstract class Enemy : Entity
 
     [Header("Dependences")]
     protected NavMeshAgent enemyNav;
+    protected Animator enemyAnim;
     protected Player player;
 
     [Header("Events")]
+    [SerializeField] protected UltEvent respawnEvent;
     private UltEvent defeatEvent;
     public UltEvent DefeatEvent { get => defeatEvent; set => defeatEvent = value; }
 
@@ -20,6 +22,7 @@ public abstract class Enemy : Entity
     {
         base.Start();
         enemyNav = GetNavMesh();
+        enemyAnim = GetAnimator();
         player = GetPlayer();
     }
     protected virtual void Attack()
@@ -37,13 +40,9 @@ public abstract class Enemy : Entity
     protected override void Defeat()
     {
         DefeatEvent.Invoke();
-        FullHealth();
-        gameObject.SetActive(false);
+        enemyNav.isStopped = true;
     }
     private NavMeshAgent GetNavMesh() => GetComponent<NavMeshAgent>();
+    private Animator GetAnimator() => GetComponent<Animator>();
     private Player GetPlayer() => FindObjectOfType<Player>();
-    //private void OnDestroy()
-    //{
-    //    DefeatEvent.Clear();
-    //}
 }

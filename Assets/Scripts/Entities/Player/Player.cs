@@ -10,8 +10,10 @@ public class Player : Entity, IPushable
     private Vector3 moveInput;
 
     [Header("Dependences")]
+    [SerializeField] private Weapon playerWeapon;
     private Camera mainCamera;
     private CharacterController characterController;
+    private Animator playerAnim;
 
     [Header("Damage Push")]
     [SerializeField] protected float pushDecayRate;
@@ -24,6 +26,15 @@ public class Player : Entity, IPushable
         base.Start();
         mainCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
+        playerAnim = GetComponent<Animator>();
+    }
+    protected override void Update()
+    {
+        if (!isDeath)
+        {
+            base.Update();
+            playerWeapon.UseWeapon(playerAnim);
+        }
     }
     protected override void Movement()
     {
@@ -77,6 +88,7 @@ public class Player : Entity, IPushable
 
     protected override void Defeat()
     {
-        Debug.Log("Muelto");
+        entityRb.Sleep();
+        playerAnim.Play("Death");
     }
 }

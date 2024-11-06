@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UltEvents;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,12 +9,8 @@ public abstract class Entity : MonoBehaviour
     [Header("Health")]
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
-
-    [Header("Attributes")]
-    [SerializeField] protected float speed;
-
-    [Header("Dependences")]
-    protected Rigidbody entityRb;
+    [SerializeField] private UltEvent<float> healthEvent;
+    [SerializeField] private UltEvent deathEvent;
     public float RemainingHealthPercentage
     {
         get
@@ -21,6 +18,13 @@ public abstract class Entity : MonoBehaviour
             return currentHealth / maxHealth;
         }
     }
+
+    [Header("Attributes")]
+    [SerializeField] protected float speed;
+    protected bool isDeath;
+
+    [Header("Dependences")]
+    protected Rigidbody entityRb;
     protected virtual void Start()
     {
         entityRb = GetComponent<Rigidbody>();
@@ -39,8 +43,12 @@ public abstract class Entity : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            isDeath = true;
+            deathEvent.Invoke();
             Defeat();
         }
+
+        healthEvent.Invoke(RemainingHealthPercentage);
     }
 
     public void AddHealth(float amountToAdd)
@@ -56,6 +64,8 @@ public abstract class Entity : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
+        healthEvent.Invoke(RemainingHealthPercentage);
     }
     public void FullHealth()
     {

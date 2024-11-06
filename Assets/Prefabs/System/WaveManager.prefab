@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyLimitWave: 10
   enemyTypes:
-  - {fileID: 8418779050877980831, guid: 10d933d6806ab0141a4815e3d11347b4, type: 3}
+  - {fileID: 1499663030232447359, guid: fa3a4c3bfaa596945b40f4f79b82ece9, type: 3}
 --- !u!114 &7434921072265114260
 MonoBehaviour:
   m_ObjectHideFlags: 0
